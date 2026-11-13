@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #171512;
+  --color-cream: #f7f4ee;
+  --color-sand: #efe9df;
+  --color-gold: #c8963e;
+  --font-display: "Anton", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body { background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--color-gold); color: #fff; }
+@media (pointer: fine) { *, *::before { cursor: none !important; } }
+@keyframes marquee { to { transform: translateX(-100%); } }
