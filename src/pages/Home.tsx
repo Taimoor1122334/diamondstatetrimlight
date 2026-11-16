@@ -168,7 +168,7 @@ function Work() {
                 <img src={s.src} alt={s.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
               </div>
               <div className="mt-3 flex items-baseline justify-between gap-3">
-                <h3 className="font-display text-xl text-ink transition-colors duration-300 group-hover:text-gold">{s.title}</h3>
+                <h3 className="font-display text-xl text-ink">{s.title}</h3>
                 <span className="text-sm text-ink/55">{s.tag}</span>
               </div>
             </Link>
@@ -227,7 +227,7 @@ function Faq() {
             <div key={q} className="border-b border-ink/10">
               <button type="button" onClick={() => setO(o === i ? null : i)} aria-expanded={o === i} className="flex w-full items-center justify-between gap-4 py-4 text-left">
                 <span className="text-lg font-semibold">{q}</span>
-                <span className="text-gold" aria-hidden>{o === i ? "–" : "+"}</span>
+                <span className="text-ink/45" aria-hidden>{o === i ? "–" : "+"}</span>
               </button>
               <div className="grid transition-[grid-template-rows] duration-300 ease-out" style={{ gridTemplateRows: o === i ? "1fr" : "0fr" }}>
                 <div className="overflow-hidden">

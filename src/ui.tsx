@@ -3,16 +3,16 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { LOGO_DARK, LOGO_LIGHT, ESTIMATE_URL, PHONE, EMAIL, FB, IG } from "./data";
 
 export function Tag({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <p className={`text-sm font-semibold text-gold ${className}`}>{children}</p>;
+  return <p className={`text-sm font-semibold text-ink/55 ${className}`}>{children}</p>;
 }
 
 export function Btn({ href, to, children, dark = true, onDark = false }: { href?: string; to?: string; children: string; dark?: boolean; onDark?: boolean }) {
   const tone = onDark
     ? "bg-cream text-ink hover:bg-white"
     : dark
-      ? "bg-gold text-white hover:bg-[#734a12]"
+      ? "bg-ink text-white hover:bg-[#2c3b36]"
       : "border border-ink/20 bg-white text-ink hover:border-ink/40 hover:bg-sand";
-  const cls = `inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${tone}`;
+  const cls = `inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${tone}`;
   return href
     ? <a href={href} target="_blank" rel="noreferrer" className={cls}>{children}</a>
     : <Link to={to!} className={cls}>{children}</Link>;
@@ -43,7 +43,7 @@ export function Nav() {
           <Link to="/" className="flex items-center"><img src={LOGO_DARK} alt="Diamond State Trimlight" className="h-12 w-auto md:h-14" /></Link>
           <nav className="hidden items-center gap-8 md:flex">
             {links.map(([l, h]) => (
-              <NavLink key={h} to={h} end className={({ isActive }) => `text-base ${isActive ? "font-semibold text-ink underline decoration-gold decoration-2 underline-offset-8" : "text-ink/75 hover:text-ink"}`}>
+              <NavLink key={h} to={h} end className={({ isActive }) => `text-base ${isActive ? "font-semibold text-ink" : "text-ink/70 hover:text-ink"}`}>
                 {l}
               </NavLink>
             ))}
@@ -84,20 +84,20 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/75">A locally owned, family Trimlight dealer in Hot Springs. We install it, and we service it.</p>
         </div>
         <div>
-          <p className="text-sm font-semibold text-brass">Visit</p>
+          <p className="text-sm font-semibold text-white/70">Visit</p>
           <p className="mt-3 text-sm leading-relaxed text-cream/80">Hot Springs, Arkansas<br />Monday – Friday<br />10am – 5pm CST</p>
         </div>
         <div>
-          <p className="text-sm font-semibold text-brass">Talk with us</p>
+          <p className="text-sm font-semibold text-white/70">Talk with us</p>
           <a href="tel:5017222336" className="mt-3 block text-lg font-semibold hover:text-white">{PHONE}</a>
           <a href={`mailto:${EMAIL}`} className="mt-1 block break-words text-sm text-cream/80 hover:text-white">{EMAIL}</a>
           <div className="mt-4 flex gap-4 text-sm">
-            <a href={FB} target="_blank" rel="noreferrer" className="underline decoration-cream/30 underline-offset-4 hover:text-white">Facebook</a>
-            <a href={IG} target="_blank" rel="noreferrer" className="underline decoration-cream/30 underline-offset-4 hover:text-white">Instagram</a>
+            <a href={FB} target="_blank" rel="noreferrer" className="hover:text-white">Facebook</a>
+            <a href={IG} target="_blank" rel="noreferrer" className="hover:text-white">Instagram</a>
           </div>
         </div>
         <div>
-          <p className="text-sm font-semibold text-brass">Pages</p>
+          <p className="text-sm font-semibold text-white/70">Pages</p>
           <div className="mt-3 flex flex-col gap-2 text-sm">
             {links.map(([l, h]) => <Link key={h} to={h} className="text-cream/80 hover:text-white">{l}</Link>)}
           </div>

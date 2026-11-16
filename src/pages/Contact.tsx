@@ -23,7 +23,7 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 export default function Contact() {
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
-  const input = "w-full rounded-md border border-ink/20 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-gold";
+  const input = "w-full rounded-md border border-ink/20 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-ink";
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
@@ -63,13 +63,13 @@ export default function Contact() {
               {info.map(([k, v, h]) => (
                 <div key={k} className="flex items-baseline justify-between gap-4 py-3">
                   <dt className="text-sm font-semibold text-ink/60">{k}</dt>
-                  <dd className="text-right">{h ? <a href={h} className="break-words hover:text-gold">{v}</a> : v}</dd>
+                  <dd className="text-right">{h ? <a href={h} className="break-words hover:text-ink/60">{v}</a> : v}</dd>
                 </div>
               ))}
             </dl>
             <div className="mt-5 flex gap-4 text-sm">
-              <a href={FB} target="_blank" rel="noreferrer" className="font-semibold underline decoration-ink/20 underline-offset-4 hover:text-gold">Facebook</a>
-              <a href={IG} target="_blank" rel="noreferrer" className="font-semibold underline decoration-ink/20 underline-offset-4 hover:text-gold">Instagram</a>
+              <a href={FB} target="_blank" rel="noreferrer" className="font-semibold hover:text-ink/60">Facebook</a>
+              <a href={IG} target="_blank" rel="noreferrer" className="font-semibold hover:text-ink/60">Instagram</a>
             </div>
           </div>
 
@@ -79,7 +79,7 @@ export default function Contact() {
               <div className="mt-6 rounded-lg border border-ink/10 bg-sand p-8">
                 <p className="font-display text-3xl text-ink">Thank you.</p>
                 <p className="mt-3 text-ink/70">We got your note and will be in touch soon.</p>
-                <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold underline underline-offset-4">Send another message</button>
+                <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold hover:text-ink/60">Send another message</button>
               </div>
             ) : (
               <form onSubmit={submit} className="mt-6 space-y-5">
@@ -89,7 +89,7 @@ export default function Contact() {
                   <Field label="Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(501) 555-0100" /></Field>
                 </div>
                 <Field label="How can we help?"><textarea required name="msg" rows={5} className={`${input} resize-y`} placeholder="Tell us about your home or business." /></Field>
-                <button type="submit" className="rounded-md bg-gold px-5 py-3 text-base font-semibold text-white hover:bg-[#734a12]">Send message</button>
+                <button type="submit" className="rounded-md bg-ink px-5 py-3 text-base font-semibold text-white hover:bg-[#2c3b36]">Send message</button>
               </form>
             )}
           </div>

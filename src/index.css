@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,560&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #2c2824;
-  --color-cream: #fbf8f3;
-  --color-sand: #f3ece2;
-  --color-gold: #8a5a16;
-  --color-brass: #f0d7a4;
-  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --color-ink: #1a2420;
+  --color-cream: #ffffff;
+  --color-sand: #f2f4f3;
+  --color-gold: #1a2420;
+  --color-brass: #d5ddd8;
+  --font-display: "Albert Sans", "Segoe UI", sans-serif;
+  --font-sans: "Albert Sans", "Segoe UI", sans-serif;
 }
 
 body {
@@ -19,8 +19,13 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold);
+  background: #1a2420;
   color: #fff;
+}
+
+.font-display {
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 @keyframes fade {
