@@ -1,106 +1,122 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { shots, ESTIMATE_URL } from "../data";
-import { Btn, FadeUp, PageHero, Tag, useCursor } from "../ui";
+import { Btn, PageHero } from "../ui";
 
-const ease = [0.22, 1, 0.36, 1] as const;
 const cats = ["All", ...Array.from(new Set(shots.map((s) => s.tag)))];
+
+function FadePhoto({ src, alt }: { src: string; alt: string }) {
+  const [shown, setShown] = useState(src);
+  const [dim, setDim] = useState(false);
+  useEffect(() => {
+    if (src === shown) {
+      setDim(false);
+      return;
+    }
+    let cancel = false;
+    setDim(true);
+    const img = new Image();
+    img.src = src;
+    const done = () => { if (!cancel) setShown(src); };
+    if (img.complete && img.naturalWidth > 0) done();
+    else {
+      img.onload = done;
+      img.onerror = done;
+    }
+    return () => { cancel = true; };
+  }, [src, shown]);
+  return (
+    <img
+      src={shown}
+      alt={alt}
+      className={`mx-auto mt-4 max-h-[68vh] w-auto max-w-full rounded-md object-contain transition-opacity duration-300 ${dim ? "opacity-40" : "opacity-100"}`}
+    />
+  );
+}
 
 export default function Portfolio() {
   const [cat, setCat] = useState("All");
   const [open, setOpen] = useState<number | null>(null);
-  const { set } = useCursor();
   const list = shots.filter((s) => cat === "All" || s.tag === cat);
+
+  const step = (dir: number) => setOpen((cur) => (cur === null ? cur : (cur + dir + list.length) % list.length));
 
   useEffect(() => {
     const k = (e: KeyboardEvent) => {
       if (open === null) return;
       if (e.key === "Escape") setOpen(null);
-      if (e.key === "ArrowRight") setOpen((open + 1) % list.length);
-      if (e.key === "ArrowLeft") setOpen((open - 1 + list.length) % list.length);
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
     };
-    addEventListener("keydown", k); return () => removeEventListener("keydown", k);
+    addEventListener("keydown", k);
+    return () => removeEventListener("keydown", k);
   }, [open, list.length]);
 
   return (
     <>
-      <PageHero tag="Portfolio" title="Our Work in Light" sub="A look at Trimlight installs across Arkansas — discreet trim by day, unforgettable color by night." />
-      <section className="px-5 pb-20 md:px-10 md:pb-32">
-        <div className="mx-auto max-w-[1500px]">
-          <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-y border-ink/10 py-4 md:mb-12 md:gap-6 md:py-5">
-            <div className="-mx-1 flex flex-wrap gap-1 md:mx-0 md:gap-2">
+      <PageHero
+        tag="Our work"
+        title="Installs around Arkansas"
+        sub="A look at Trimlight on real homes. The track stays quiet during the day. At night, neighbors usually ask what it is."
+      />
+      <section className="px-5 py-12 md:px-8 md:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2">
               {cats.map((c) => (
-                <button key={c} onClick={() => setCat(c)} className={`relative min-h-[42px] rounded-full px-4 py-3 text-xs uppercase tracking-[0.16em] transition-colors md:px-5 md:tracking-[0.18em] ${cat === c ? "text-cream" : "text-ink/60 hover:text-ink"}`}>
-                  {cat === c && <motion.span layoutId="pill" className="absolute inset-0 rounded-full bg-ink" transition={{ duration: 0.5, ease }} />}
-                  <span className="relative">{c}</span>
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => { setCat(c); setOpen(null); }}
+                  className={`rounded-md px-3 py-2 text-sm font-semibold ${cat === c ? "bg-ink text-cream" : "bg-white text-ink/70 hover:bg-sand"}`}
+                >
+                  {c}
                 </button>
               ))}
             </div>
-            <Tag>{String(list.length).padStart(2, "0")} Projects</Tag>
+            <p className="text-sm text-ink/60">{list.length} {list.length === 1 ? "project" : "projects"}</p>
           </div>
-          <motion.div layout className="columns-1 gap-4 sm:columns-2 md:gap-6 lg:columns-3">
-            <AnimatePresence mode="popLayout">
-              {list.map((s, i) => (
-                <motion.button layout key={s.src} onClick={() => setOpen(i)}
-                  initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.7, ease, delay: (i % 3) * 0.08 }}
-                  onMouseEnter={() => set("Open")} onMouseLeave={() => set("")}
-                  className="group relative mb-4 block w-full overflow-hidden rounded-3xl text-left md:mb-6">
-                  <img src={s.src} alt={s.title} loading="lazy" className={`w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-110 ${i % 3 === 1 ? "aspect-[3/4]" : "aspect-[4/3]"}`} />
-                  {/* touch screens can't hover, so captions are always shown there */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 [@media(hover:none)]:opacity-100" />
-                  <div className="absolute inset-x-4 bottom-4 flex translate-y-6 items-end justify-between text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 md:inset-x-5 md:bottom-5 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
-                    <div><p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/75">[{s.tag}]</p><p className="font-display text-xl uppercase md:text-2xl">{s.title}</p></div>
-                    <span className="font-mono text-xs">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                </motion.button>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-          <FadeUp className="mt-14 flex flex-col items-center rounded-3xl bg-sand px-6 py-14 text-center md:mt-24 md:py-20">
-            <Tag>Your home next?</Tag>
-            <h2 className="mt-5 max-w-3xl font-display text-[2.75rem] uppercase leading-[0.9] md:mt-6 md:text-6xl lg:text-7xl">Let's design your lighting</h2>
-            <div className="mt-8 md:mt-10"><Btn href={ESTIMATE_URL}>Free Estimate</Btn></div>
-          </FadeUp>
+
+          <div key={cat} className="rise mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {list.map((s, i) => (
+              <button key={s.src} type="button" onClick={() => setOpen(i)} className="group block text-left">
+                <div className="overflow-hidden rounded-lg border border-ink/10 bg-sand">
+                  <img src={s.src} alt={s.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
+                </div>
+                <p className="mt-3 font-display text-xl text-ink">{s.title}</p>
+                <p className="text-sm text-ink/55">{s.tag}</p>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-14 rounded-lg border border-ink/10 bg-sand px-6 py-10 text-center md:px-10">
+            <h2 className="font-display text-3xl text-ink md:text-4xl">Your place could be next.</h2>
+            <p className="mx-auto mt-3 max-w-xl text-ink/70">Tell us a little about the house or the building. We’ll come back with a clear estimate.</p>
+            <div className="mt-6"><Btn href={ESTIMATE_URL}>Request a free estimate</Btn></div>
+          </div>
         </div>
       </section>
 
-      <AnimatePresence>
-        {open !== null && list[open] && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex flex-col bg-cream/95 p-4 backdrop-blur-xl md:p-8" onClick={() => setOpen(null)}>
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs">{String(open + 1).padStart(2, "0")} / {String(list.length).padStart(2, "0")}</span>
-              <button className="rounded-full bg-ink px-5 py-2.5 text-xs uppercase tracking-widest text-cream">Close ✕</button>
+      {open !== null && list[open] && createPortal(
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-ink p-4 md:p-8" onClick={() => setOpen(null)}>
+          <div className="flex w-full max-w-5xl flex-col" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between text-cream">
+              <span className="text-sm">{open + 1} of {list.length}</span>
+              <button type="button" onClick={() => setOpen(null)} className="rounded-md bg-cream px-4 py-2 text-sm font-semibold text-ink">Close</button>
             </div>
-            <div className="relative flex flex-1 items-center justify-center py-6 md:px-20">
-              <button
-                type="button"
-                aria-label="Previous image"
-                onClick={(e) => { e.stopPropagation(); setOpen((open - 1 + list.length) % list.length); }}
-                className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ink/20 bg-cream/85 text-ink shadow-md backdrop-blur-md transition-colors hover:bg-ink hover:text-cream md:left-2 md:h-14 md:w-14"
-              >
-                ←
-              </button>
-              <AnimatePresence mode="wait">
-                <motion.img key={list[open].full} src={list[open].full} alt={list[open].title} onClick={(e) => e.stopPropagation()}
-                  initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.5, ease }}
-                  className="max-h-[75vh] max-w-full rounded-2xl object-contain shadow-2xl" />
-              </AnimatePresence>
-              <button
-                type="button"
-                aria-label="Next image"
-                onClick={(e) => { e.stopPropagation(); setOpen((open + 1) % list.length); }}
-                className="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ink/20 bg-cream/85 text-ink shadow-md backdrop-blur-md transition-colors hover:bg-ink hover:text-cream md:right-2 md:h-14 md:w-14"
-              >
-                →
-              </button>
+            <FadePhoto src={list[open].full} alt={list[open].title} />
+            <div className="mt-4 flex items-center justify-between gap-4 text-cream">
+              <button type="button" onClick={() => step(-1)} className="rounded-md bg-cream px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-white" aria-label="Previous image">Previous</button>
+              <div className="min-w-0 text-center">
+                <p className="truncate font-display text-2xl">{list[open].title}</p>
+                <p className="text-sm text-cream/70">{list[open].tag}</p>
+              </div>
+              <button type="button" onClick={() => step(1)} className="rounded-md bg-cream px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-white" aria-label="Next image">Next</button>
             </div>
-            <div className="text-center" onClick={(e) => e.stopPropagation()}>
-              <p className="font-display text-2xl uppercase md:text-4xl">{list[open].title}</p>
-              <Tag>{list[open].tag}</Tag>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>,
+        document.body,
+      )}
     </>
   );
 }

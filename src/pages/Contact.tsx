@@ -1,9 +1,6 @@
-import { motion } from "framer-motion";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { shots, EMAIL, PHONE, FB, IG, ESTIMATE_URL } from "../data";
-import { Btn, FadeUp, PageHero, Tag } from "../ui";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { Btn, PageHero } from "../ui";
 
 function fmtPhone(v: string) {
   let d = v.replace(/\D/g, "");
@@ -14,10 +11,10 @@ function fmtPhone(v: string) {
   return d;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <label className="group block border-b border-ink/15 pb-3 transition-colors focus-within:border-gold">
-      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink/50 group-focus-within:text-gold">{label}</span>
+    <label className="block">
+      <span className="mb-1.5 block text-sm font-semibold text-ink">{label}</span>
       {children}
     </label>
   );
@@ -26,7 +23,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 export default function Contact() {
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
-  const input = "mt-1 w-full bg-transparent py-1.5 text-lg outline-none placeholder:text-ink/25 md:text-xl";
+  const input = "w-full rounded-md border border-ink/20 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-gold";
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
@@ -34,59 +31,65 @@ export default function Contact() {
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Website inquiry")}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
-  const info = [
-    ["Hours", "Mon – Fri : 10am – 5pm CST"],
+  const info: [string, string, string?][] = [
+    ["Hours", "Monday – Friday, 10am – 5pm CST"],
     ["Location", "Hot Springs, Arkansas"],
     ["Email", EMAIL, `mailto:${EMAIL}`],
     ["Phone", PHONE, "tel:5017222336"],
   ];
+
   return (
     <>
-      <PageHero tag="Contact" title="Let's Talk Light" sub="Questions about permanent lighting? Send a message — the person you talk to is the person who'll service your system." />
-      <section className="px-5 pb-20 md:px-10 md:pb-32">
-        <div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-12 lg:gap-16">
+      <PageHero
+        tag="Contact"
+        title="We’d like to hear about your place."
+        sub="Send a note, or call during the week. The person you talk with is the person who will service the system."
+      />
+      <section className="px-5 py-12 md:px-8 md:py-16">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl">
-              <img src={shots[13].src} alt="" className="aspect-[4/5] w-full object-cover md:aspect-[16/10] lg:aspect-[4/5]" />
-              <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/80 p-5 backdrop-blur-xl md:inset-x-4 md:bottom-4 md:right-auto md:max-w-sm lg:right-4 lg:max-w-none">
-                <p className="font-display text-2xl uppercase">Skip the form?</p>
-                <p className="mt-1 text-sm text-ink/60">Request your free quote directly through Trimlight.</p>
-                <div className="mt-4"><Btn href={ESTIMATE_URL}>Free Estimate</Btn></div>
+            <div className="overflow-hidden rounded-lg border border-ink/10">
+              <img src={shots[13].src} alt="A Trimlight install on a home at night" className="aspect-[4/3] w-full object-cover" />
+            </div>
+            <div className="mt-6 rounded-lg border border-ink/10 bg-sand p-6">
+              <p className="font-display text-2xl text-ink">Rather skip the form?</p>
+              <p className="mt-2 text-ink/70">Request a quote through Trimlight, or just call the shop.</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Btn href={ESTIMATE_URL}>Free estimate</Btn>
+                <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-ink/20 bg-white px-5 py-3 text-base font-semibold hover:bg-cream">Call {PHONE}</a>
               </div>
             </div>
-            <div className="mt-8 divide-y divide-ink/10 border-y border-ink/10 md:mt-10">
-              {info.map(([k, v, h], i) => (
-                <FadeUp key={k} delay={i * 0.08} className="flex items-center justify-between gap-4 py-3 md:py-4">
-                  <Tag className="shrink-0">{k}</Tag>
-                  {h ? <a href={h} className="break-words py-2 text-right hover:text-gold">{v}</a> : <span className="py-2 text-right">{v}</span>}
-                </FadeUp>
+            <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+              {info.map(([k, v, h]) => (
+                <div key={k} className="flex items-baseline justify-between gap-4 py-3">
+                  <dt className="text-sm font-semibold text-ink/60">{k}</dt>
+                  <dd className="text-right">{h ? <a href={h} className="break-words hover:text-gold">{v}</a> : v}</dd>
+                </div>
               ))}
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={FB} target="_blank" rel="noreferrer" className="whitespace-nowrap rounded-full border border-ink/15 px-5 py-3 text-xs uppercase tracking-widest hover:bg-ink hover:text-cream">Facebook ↗</a>
-              <a href={IG} target="_blank" rel="noreferrer" className="whitespace-nowrap rounded-full border border-ink/15 px-5 py-3 text-xs uppercase tracking-widest hover:bg-ink hover:text-cream">Instagram ↗</a>
+            </dl>
+            <div className="mt-5 flex gap-4 text-sm">
+              <a href={FB} target="_blank" rel="noreferrer" className="font-semibold underline decoration-ink/20 underline-offset-4 hover:text-gold">Facebook</a>
+              <a href={IG} target="_blank" rel="noreferrer" className="font-semibold underline decoration-ink/20 underline-offset-4 hover:text-gold">Instagram</a>
             </div>
           </div>
-          <div className="lg:sticky lg:top-28 lg:col-span-6 lg:col-start-7 lg:self-start">
-            <Tag>Send a message</Tag>
+
+          <div className="lg:col-span-7">
+            <h2 className="font-display text-3xl text-ink">Send a message</h2>
             {sent ? (
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="mt-8 rounded-3xl bg-sand p-8 md:mt-10 md:p-10">
-                <p className="font-display text-5xl uppercase">Thank you!</p>
-                <p className="mt-4 text-ink/60">Your submission has been received. We'll be in touch soon.</p>
-                <button onClick={() => setSent(false)} className="mt-8 text-sm uppercase tracking-widest underline">Send another</button>
-              </motion.div>
+              <div className="mt-6 rounded-lg border border-ink/10 bg-sand p-8">
+                <p className="font-display text-3xl text-ink">Thank you.</p>
+                <p className="mt-3 text-ink/70">We got your note and will be in touch soon.</p>
+                <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold underline underline-offset-4">Send another message</button>
+              </div>
             ) : (
-              <form onSubmit={submit} className="mt-8 space-y-8 md:mt-10 md:space-y-10">
-                <Field label="01 — Your name"><input required name="name" className={input} placeholder="Jane Doe" /></Field>
-                <div className="grid gap-8 md:grid-cols-2 md:gap-10">
-                  <Field label="02 — Email"><input required type="email" name="email" className={input} placeholder="name@example.com" /></Field>
-                  <Field label="03 — Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(555) 123-4567" /></Field>
+              <form onSubmit={submit} className="mt-6 space-y-5">
+                <Field label="Your name"><input required name="name" className={input} placeholder="Jane Smith" /></Field>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <Field label="Email"><input required type="email" name="email" className={input} placeholder="name@email.com" /></Field>
+                  <Field label="Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(501) 555-0100" /></Field>
                 </div>
-                <Field label="04 — Message"><textarea required name="msg" rows={4} className={`${input} resize-none`} placeholder="Tell us about your home or business…" /></Field>
-                <button type="submit" className="group flex w-full items-center justify-between rounded-full bg-ink px-7 py-5 text-cream transition-colors hover:bg-gold md:px-8 md:py-6">
-                  <span className="font-display text-xl uppercase md:text-2xl">Send Message</span>
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-ink transition-transform duration-500 group-hover:rotate-45">↗</span>
-                </button>
+                <Field label="How can we help?"><textarea required name="msg" rows={5} className={`${input} resize-y`} placeholder="Tell us about your home or business." /></Field>
+                <button type="submit" className="rounded-md bg-gold px-5 py-3 text-base font-semibold text-white hover:bg-[#734a12]">Send message</button>
               </form>
             )}
           </div>
