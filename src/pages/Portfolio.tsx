@@ -68,7 +68,7 @@ export default function Portfolio() {
                   key={c}
                   type="button"
                   onClick={() => { setCat(c); setOpen(null); }}
-                  className={`rounded-md px-3 py-2 text-sm font-semibold ${cat === c ? "bg-ink text-cream" : "bg-white text-ink/70 hover:bg-sand"}`}
+                  className={`rounded-md px-3 py-2 text-sm font-semibold ${cat === c ? "bg-blue text-white" : "bg-white text-ink/70 hover:bg-sand"}`}
                 >
                   {c}
                 </button>

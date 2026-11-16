@@ -23,7 +23,7 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 export default function Contact() {
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
-  const input = "w-full rounded-md border border-ink/20 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-ink";
+  const input = "w-full rounded-md border border-ink/15 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-blue";
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
@@ -56,7 +56,7 @@ export default function Contact() {
               <p className="mt-2 text-ink/70">Request a quote through Trimlight, or just call the shop.</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Btn href={ESTIMATE_URL}>Free estimate</Btn>
-                <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-ink/20 bg-white px-5 py-3 text-base font-semibold hover:bg-cream">Call {PHONE}</a>
+                <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-blue/40 bg-white px-5 py-3 text-base font-semibold text-blue hover:bg-sand">Call {PHONE}</a>
               </div>
             </div>
             <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10">
@@ -89,7 +89,7 @@ export default function Contact() {
                   <Field label="Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(501) 555-0100" /></Field>
                 </div>
                 <Field label="How can we help?"><textarea required name="msg" rows={5} className={`${input} resize-y`} placeholder="Tell us about your home or business." /></Field>
-                <button type="submit" className="rounded-md bg-ink px-5 py-3 text-base font-semibold text-white hover:bg-[#2c3b36]">Send message</button>
+                <button type="submit" className="rounded-md bg-blue px-5 py-3 text-base font-semibold text-white hover:bg-[#1276c2]">Send message</button>
               </form>
             )}
           </div>

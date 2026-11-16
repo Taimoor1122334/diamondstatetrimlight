@@ -42,7 +42,7 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Btn href={ESTIMATE_URL}>Request a free estimate</Btn>
-            <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-ink/20 bg-white px-5 py-3 text-base font-semibold text-ink hover:bg-sand">Call {PHONE}</a>
+            <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-blue/40 bg-white px-5 py-3 text-base font-semibold text-blue hover:bg-sand">Call {PHONE}</a>
           </div>
           <p className="mt-6 text-sm text-ink/60">Locally owned · Family business · Serving Hot Springs</p>
         </div>
@@ -102,12 +102,12 @@ const stats = [
 
 function Stats() {
   return (
-    <section className="reveal bg-ink px-5 py-12 text-cream md:px-8 md:py-14">
+    <section className="reveal bg-blue px-5 py-12 text-white md:px-8 md:py-14">
       <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((x) => (
           <div key={x.n}>
             <p className="font-display text-3xl md:text-4xl">{x.n}</p>
-            <p className="mt-2 text-sm leading-relaxed text-cream/75">{x.l}</p>
+            <p className="mt-2 text-sm leading-relaxed text-white/80">{x.l}</p>
           </div>
         ))}
       </div>

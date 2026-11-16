@@ -3,16 +3,16 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { LOGO_DARK, LOGO_LIGHT, ESTIMATE_URL, PHONE, EMAIL, FB, IG } from "./data";
 
 export function Tag({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <p className={`text-sm font-semibold text-ink/55 ${className}`}>{children}</p>;
+  return <p className={`text-sm font-semibold text-blue ${className}`}>{children}</p>;
 }
 
 export function Btn({ href, to, children, dark = true, onDark = false }: { href?: string; to?: string; children: string; dark?: boolean; onDark?: boolean }) {
   const tone = onDark
-    ? "bg-cream text-ink hover:bg-white"
+    ? "bg-white text-blue hover:bg-sand"
     : dark
-      ? "bg-ink text-white hover:bg-[#2c3b36]"
-      : "border border-ink/20 bg-white text-ink hover:border-ink/40 hover:bg-sand";
-  const cls = `inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${tone}`;
+      ? "bg-blue text-white hover:bg-[#1276c2]"
+      : "border border-blue/40 bg-white text-blue hover:border-blue hover:bg-sand";
+  const cls = `inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${tone}`;
   return href
     ? <a href={href} target="_blank" rel="noreferrer" className={cls}>{children}</a>
     : <Link to={to!} className={cls}>{children}</Link>;
@@ -31,19 +31,19 @@ export function Nav() {
 
   return (
     <div className="fixed inset-x-0 top-0 z-50">
-      <div className="relative z-10 bg-ink text-cream">
+      <div className="relative z-10 bg-blue text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2 text-sm md:px-8">
           <p>Hot Springs, Arkansas</p>
           <p className="hidden sm:block">Monday – Friday, 10am – 5pm</p>
           <a href="tel:5017222336" className="font-semibold hover:text-white">{PHONE}</a>
         </div>
       </div>
-      <header className="relative z-10 border-b border-ink/10 bg-cream">
+      <header className="relative z-10 border-b border-blue/15 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 md:px-8">
           <Link to="/" className="flex items-center"><img src={LOGO_DARK} alt="Diamond State Trimlight" className="h-12 w-auto md:h-14" /></Link>
           <nav className="hidden items-center gap-8 md:flex">
             {links.map(([l, h]) => (
-              <NavLink key={h} to={h} end className={({ isActive }) => `text-base ${isActive ? "font-semibold text-ink" : "text-ink/70 hover:text-ink"}`}>
+              <NavLink key={h} to={h} end className={({ isActive }) => `text-base ${isActive ? "font-semibold text-blue" : "text-ink/70 hover:text-blue"}`}>
                 {l}
               </NavLink>
             ))}
