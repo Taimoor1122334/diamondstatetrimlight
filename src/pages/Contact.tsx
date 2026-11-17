@@ -82,7 +82,7 @@ export default function Contact() {
                   <Field label="Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(501) 555-0100" /></Field>
                 </div>
                 <Field label="How can we help?"><textarea required name="msg" rows={5} className={`${input} resize-y`} placeholder="Tell us about your home or business." /></Field>
-                <button type="submit" className="rounded-md bg-blue px-5 py-3 text-base font-medium text-white hover:bg-[#2e9a49]">Send message</button>
+                <button type="submit" className="rounded-full bg-[linear-gradient(90deg,#2ec8ff,#7a5cff_46%,#e453e8)] px-5 py-3 text-base font-medium text-white hover:brightness-110">Send message</button>
               </form>
             )}
           </div>

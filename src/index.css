@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
 @theme {
   --color-ink: #1a1a1a;
   --color-cream: #ffffff;
   --color-sand: #f4f6f5;
-  --color-blue: #38b157;
-  --font-display: "Roboto", "Segoe UI", sans-serif;
+  --color-blue: #5b27d6;
+  --font-display: "Montserrat", "Segoe UI", sans-serif;
   --font-sans: "Roboto", "Segoe UI", sans-serif;
 }
 
@@ -18,13 +18,14 @@ body {
 }
 
 ::selection {
-  background: #38b157;
+  background: #5b27d6;
   color: #fff;
 }
 
 .font-display {
-  font-weight: 700;
-  letter-spacing: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 @keyframes fade {

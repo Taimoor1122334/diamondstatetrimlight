@@ -14,9 +14,9 @@ export function Rainbow() {
 
 export function Btn({ href, to, children, dark = true }: { href?: string; to?: string; children: string; dark?: boolean }) {
   const tone = dark
-    ? "bg-blue text-white hover:bg-[#2e9a49]"
+    ? "bg-[linear-gradient(90deg,#2ec8ff,#7a5cff_46%,#e453e8)] text-white hover:brightness-110"
     : "border border-black/20 bg-white text-ink hover:bg-sand";
-  const cls = `inline-flex items-center justify-center rounded-md px-5 py-3 text-base font-medium transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${tone}`;
+  const cls = `inline-flex items-center justify-center rounded-full px-5 py-3 text-base font-medium transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue ${tone}`;
   return href
     ? <a href={href} target="_blank" rel="noreferrer" className={cls}>{children}</a>
     : <Link to={to!} className={cls}>{children}</Link>;
@@ -111,9 +111,9 @@ export function Footer() {
 
 export function PageHero({ title, sub, image }: { tag?: string; title: string; sub: string; image: string }) {
   return (
-    <section className="relative h-64 bg-[#102018] md:h-80">
+    <section className="relative h-64 overflow-hidden bg-[#3a1280] md:h-80">
       <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-[#102018]/55" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#3a1280_0%,transparent_100%)]" />
       <div className="relative z-10 flex h-full items-end">
         <div className="hero-in mx-auto w-full max-w-6xl px-5 pb-8 md:px-8 md:pb-10">
           <h1 className="max-w-3xl font-display text-3xl leading-tight text-white md:text-5xl">{title}</h1>
