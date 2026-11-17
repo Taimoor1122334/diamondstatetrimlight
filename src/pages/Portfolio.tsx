@@ -55,7 +55,7 @@ export default function Portfolio() {
   return (
     <>
       <PageHero
-        tag="Our work"
+        image={shots[0].src}
         title="Installs around Arkansas"
         sub="A look at Trimlight on real homes. The track stays quiet during the day. At night, neighbors usually ask what it is."
       />
@@ -68,7 +68,7 @@ export default function Portfolio() {
                   key={c}
                   type="button"
                   onClick={() => { setCat(c); setOpen(null); }}
-                  className={`rounded-md px-3 py-2 text-sm font-semibold ${cat === c ? "bg-blue text-white" : "bg-white text-ink/70 hover:bg-sand"}`}
+                  className={`px-2 py-2 text-sm underline-offset-4 transition-colors hover:text-blue hover:underline ${cat === c ? "font-semibold text-blue" : "text-ink/70"}`}
                 >
                   {c}
                 </button>
@@ -77,22 +77,22 @@ export default function Portfolio() {
             <p className="text-sm text-ink/60">{list.length} {list.length === 1 ? "project" : "projects"}</p>
           </div>
 
-          <div key={cat} className="rise mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div key={cat} className="stagger rise mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((s, i) => (
-              <button key={s.src} type="button" onClick={() => setOpen(i)} className="group block text-left">
-                <div className="overflow-hidden rounded-lg border border-ink/10 bg-sand">
-                  <img src={s.src} alt={s.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
-                </div>
-                <p className="mt-3 font-display text-xl text-ink">{s.title}</p>
+              <button key={s.src} type="button" onClick={() => setOpen(i)} className="reveal group block text-left">
+                <span className="zoom block">
+                  <img src={s.src} alt={s.title} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                </span>
+                <p className="mt-3 font-display text-xl text-ink transition-colors group-hover:text-blue">{s.title}</p>
                 <p className="text-sm text-ink/55">{s.tag}</p>
               </button>
             ))}
           </div>
 
-          <div className="mt-14 rounded-lg border border-ink/10 bg-sand px-6 py-10 text-center md:px-10">
-            <h2 className="font-display text-3xl text-ink md:text-4xl">Your place could be next.</h2>
-            <p className="mx-auto mt-3 max-w-xl text-ink/70">Tell us a little about the house or the building. We’ll come back with a clear estimate.</p>
-            <div className="mt-6"><Btn href={ESTIMATE_URL}>Request a free estimate</Btn></div>
+          <div className="mt-14 border-t border-black/10 pt-8">
+            <h2 className="font-display text-3xl">Your place could be next.</h2>
+            <p className="mt-3 max-w-xl">Tell us a little about the house or the building. We’ll come back with a clear estimate.</p>
+            <div className="mt-5"><Btn href={ESTIMATE_URL}>Request a free estimate</Btn></div>
           </div>
         </div>
       </section>

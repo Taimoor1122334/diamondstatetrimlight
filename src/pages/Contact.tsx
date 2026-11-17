@@ -23,7 +23,7 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 export default function Contact() {
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
-  const input = "w-full rounded-md border border-ink/15 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/35 focus:border-blue";
+  const input = "w-full rounded border border-black/20 bg-white px-3 py-3 text-base outline-none placeholder:text-ink/40 focus:border-blue";
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
@@ -41,45 +41,38 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        tag="Contact"
+        image={shots[3].src}
         title="We’d like to hear about your place."
         sub="Send a note, or call during the week. The person you talk with is the person who will service the system."
       />
       <section className="px-5 py-12 md:px-8 md:py-16">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-lg border border-ink/10">
-              <img src={shots[13].src} alt="A Trimlight install on a home at night" className="aspect-[4/3] w-full object-cover" />
-            </div>
-            <div className="mt-6 rounded-lg border border-ink/10 bg-sand p-6">
-              <p className="font-display text-2xl text-ink">Rather skip the form?</p>
-              <p className="mt-2 text-ink/70">Request a quote through Trimlight, or just call the shop.</p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Btn href={ESTIMATE_URL}>Free estimate</Btn>
-                <a href="tel:5017222336" className="inline-flex items-center justify-center rounded-md border border-blue/40 bg-white px-5 py-3 text-base font-semibold text-blue hover:bg-sand">Call {PHONE}</a>
-              </div>
-            </div>
-            <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+          <div className="reveal lg:col-span-5">
+            <img src={shots[13].src} alt="A Trimlight install on a home at night" className="aspect-[4/3] w-full object-cover" />
+            <p className="mt-5 font-semibold">Rather skip the form?</p>
+            <p className="mt-1">Request a quote through Trimlight, or call the shop at <a href="tel:5017222336" className="font-semibold text-blue underline-offset-4 transition-colors hover:underline">{PHONE}</a>.</p>
+            <div className="mt-4"><Btn href={ESTIMATE_URL}>Get a quote</Btn></div>
+            <dl className="mt-6 divide-y divide-black/10 border-y border-black/10">
               {info.map(([k, v, h]) => (
                 <div key={k} className="flex items-baseline justify-between gap-4 py-3">
                   <dt className="text-sm font-semibold text-ink/60">{k}</dt>
-                  <dd className="text-right">{h ? <a href={h} className="break-words hover:text-ink/60">{v}</a> : v}</dd>
+                  <dd className="text-right">{h ? <a href={h} className="break-words underline-offset-4 transition-colors hover:text-blue hover:underline">{v}</a> : v}</dd>
                 </div>
               ))}
             </dl>
             <div className="mt-5 flex gap-4 text-sm">
-              <a href={FB} target="_blank" rel="noreferrer" className="font-semibold hover:text-ink/60">Facebook</a>
-              <a href={IG} target="_blank" rel="noreferrer" className="font-semibold hover:text-ink/60">Instagram</a>
+              <a href={FB} target="_blank" rel="noreferrer" className="font-semibold underline-offset-4 transition-colors hover:text-blue hover:underline">Facebook</a>
+              <a href={IG} target="_blank" rel="noreferrer" className="font-semibold underline-offset-4 transition-colors hover:text-blue hover:underline">Instagram</a>
             </div>
           </div>
 
-          <div className="lg:col-span-7">
+          <div className="reveal lg:col-span-7">
             <h2 className="font-display text-3xl text-ink">Send a message</h2>
             {sent ? (
-              <div className="mt-6 rounded-lg border border-ink/10 bg-sand p-8">
+              <div className="mt-6 bg-sand p-8">
                 <p className="font-display text-3xl text-ink">Thank you.</p>
                 <p className="mt-3 text-ink/70">We got your note and will be in touch soon.</p>
-                <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold hover:text-ink/60">Send another message</button>
+                <button type="button" onClick={() => setSent(false)} className="mt-6 text-sm font-semibold underline-offset-4 transition-colors hover:text-blue hover:underline">Send another message</button>
               </div>
             ) : (
               <form onSubmit={submit} className="mt-6 space-y-5">
@@ -89,7 +82,7 @@ export default function Contact() {
                   <Field label="Phone"><input type="tel" value={phone} onChange={(e) => setPhone(fmtPhone(e.target.value))} pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" className={input} placeholder="(501) 555-0100" /></Field>
                 </div>
                 <Field label="How can we help?"><textarea required name="msg" rows={5} className={`${input} resize-y`} placeholder="Tell us about your home or business." /></Field>
-                <button type="submit" className="rounded-md bg-blue px-5 py-3 text-base font-semibold text-white hover:bg-[#1276c2]">Send message</button>
+                <button type="submit" className="rounded-md bg-blue px-5 py-3 text-base font-medium text-white hover:bg-[#2e9a49]">Send message</button>
               </form>
             )}
           </div>
