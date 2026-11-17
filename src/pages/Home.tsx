@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { shots, ESTIMATE_URL, PHONE } from "../data";
 import { Btn } from "../ui";
@@ -7,11 +7,10 @@ function Hero() {
   const slides = shots.slice(0, 6);
   const [i, setI] = useState(0);
   const [shown, setShown] = useState(0);
-  const paused = useRef(false);
 
   useEffect(() => {
     const t = setInterval(() => {
-      if (!paused.current) setI((v) => (v + 1) % slides.length);
+      setI((v) => (v + 1) % slides.length);
     }, 4000);
     return () => clearInterval(t);
   }, [i, slides.length]);
@@ -33,8 +32,6 @@ function Hero() {
   return (
     <section
       className="relative h-[78vh] min-h-[520px] max-h-[760px] overflow-hidden bg-[#102018]"
-      onMouseEnter={() => { paused.current = true; }}
-      onMouseLeave={() => { paused.current = false; }}
     >
       {slides.map((s, k) => (
         <img
