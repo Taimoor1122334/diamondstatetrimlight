@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { shots, ESTIMATE_URL, PHONE } from "../data";
-import { Btn, Rainbow } from "../ui";
+import { Btn } from "../ui";
 
 function Hero() {
   const slides = shots.slice(0, 6);
@@ -101,9 +101,9 @@ export default function Home() {
           <h2 className="reveal text-center font-display text-3xl md:text-4xl">What you get</h2>
           <div className="stagger mt-10 grid gap-4 sm:grid-cols-3">
             {points.map(([color, t, d]) => (
-              <div key={t} className="reveal px-6 py-8 text-white" style={{ backgroundColor: color }}>
+              <div key={t} className="reveal border border-black/10 bg-white px-6 py-8" style={{ borderTopWidth: 4, borderTopColor: color }}>
                 <h3 className="font-display text-xl">{t}</h3>
-                <p className="mt-3 leading-relaxed text-white/90">{d}</p>
+                <p className="mt-3 leading-relaxed text-ink/80">{d}</p>
               </div>
             ))}
           </div>
@@ -144,24 +144,25 @@ export default function Home() {
         </div>
       </section>
 
-      <Rainbow />
-      <section className="bg-[#2f80ed] px-5 py-16 text-white md:px-8 md:py-20">
-        <div className="reveal mx-auto max-w-3xl text-center">
+      <section className="relative overflow-hidden bg-[#102018] px-5 py-16 text-white md:px-8 md:py-20">
+        <img src={shots[12].src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-[#102018]/60" />
+        <div className="reveal relative mx-auto max-w-3xl text-center">
           <p className="font-display text-2xl leading-snug md:text-3xl">“We use our Trimlight every single day. It’s rare to drive past our house and not see a fun pattern going.”</p>
-          <p className="mt-4 text-white/75">Diamond State Trimlight, Hot Springs</p>
+          <p className="mt-4 text-white/80">Diamond State Trimlight, Hot Springs</p>
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-20">
+      <section className="bg-sand px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
           <div className="reveal">
             <h2 className="font-display text-3xl">Questions</h2>
             <p className="mt-3 leading-relaxed">Rather talk it through? Call {PHONE}, Monday through Friday, 10am to 5pm.</p>
             <div className="mt-6"><Btn to="/contact">Contact the shop</Btn></div>
           </div>
-          <dl className="stagger space-y-5">
+          <dl className="stagger divide-y divide-black/10">
             {faqs.map(([q, a]) => (
-              <div key={q} className="reveal">
+              <div key={q} className="reveal py-4 first:pt-0 last:pb-0">
                 <dt className="font-semibold">{q}</dt>
                 <dd className="mt-1 leading-relaxed text-ink/80">{a}</dd>
               </div>
@@ -170,7 +171,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Rainbow />
       <section className="bg-blue px-5 py-14 text-center text-white md:px-8">
         <div className="reveal">
         <h2 className="font-display text-3xl">Lights on your place next.</h2>
