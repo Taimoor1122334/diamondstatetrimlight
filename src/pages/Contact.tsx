@@ -34,6 +34,7 @@ export default function Contact() {
   const info: [string, string, string?][] = [
     ["Hours", "Monday – Friday, 10am – 5pm CST"],
     ["Area", "Serving Arkansas"],
+    ["Mail", "PO Box 20281, Hot Springs, AR 71903"],
     ["Email", EMAIL, `mailto:${EMAIL}`],
     ["Phone", PHONE, "tel:5017222336"],
   ];

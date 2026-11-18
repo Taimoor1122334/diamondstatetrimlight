@@ -90,7 +90,7 @@ export function Footer() {
         </div>
         <div className="text-sm leading-relaxed">
           <p className="font-semibold">Call us</p>
-          <p className="mt-2">Serving Arkansas<br />Monday – Friday<br />10am – 5pm CST</p>
+          <p className="mt-2">Serving Arkansas<br />PO Box 20281<br />Hot Springs, AR 71903<br />Monday – Friday<br />10am – 5pm CST</p>
           <a href="tel:5017222336" className="mt-3 block text-lg font-semibold text-blue underline-offset-4 transition-colors hover:underline">{PHONE}</a>
           <a href={`mailto:${EMAIL}`} className="mt-1 block break-words underline-offset-4 transition-colors hover:text-blue hover:underline">{EMAIL}</a>
         </div>
