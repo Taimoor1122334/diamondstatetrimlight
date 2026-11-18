@@ -45,9 +45,9 @@ function Hero() {
       <div className="pointer-events-none absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#3a1280_0%,transparent_100%)]" />
       <div className="relative z-10 flex h-full items-end px-5 pb-16 md:items-center md:px-16 md:pb-16">
         <div className="hero-in max-w-xl text-white">
-          <h1 className="font-display text-4xl leading-tight md:text-6xl">Permanent lighting for your Hot Springs home.</h1>
+          <h1 className="font-display text-4xl leading-tight md:text-6xl">Permanent lighting across Arkansas.</h1>
           <p className="mt-4 text-lg leading-relaxed text-white/90">
-            We’re a family-owned Trimlight dealer. The lights go up once, stay quiet during the day, and change color from your phone at night.
+            We’re a locally owned Trimlight dealer. The lights go up once, stay quiet during the day, and handle security, accent, and color from your phone.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
             <Btn href={ESTIMATE_URL}>Get a quote</Btn>
@@ -75,15 +75,15 @@ function Hero() {
 
 const points: [string, string][] = [
   ["Hard to spot by day", "The track comes in 48 colors and follows the roofline, so the house still looks like itself at noon."],
-  ["Installed by us", "A Hot Springs family puts the system on and comes back if it needs attention."],
-  ["Every night of the year", "Holidays, game day, a party, or a little light on the walk when you get home."],
+  ["Installed by us", "A local crew puts the system on homes and commercial buildings, and comes back if it needs attention."],
+  ["Every night of the year", "Security lighting, uplighting, downlighting, and color for a gathering or a holiday."],
 ];
 
 const faqs = [
-  ["What is Trimlight?", "A permanent LED system along the roofline. You pick colors and patterns from your phone."],
-  ["Will I see it during the day?", "Not much. The track is matched to the house. Most people notice it at night."],
+  ["What is Trimlight?", "A permanent LED system on the building. You run security, uplighting, downlighting, and color from your phone."],
+  ["Will I see it during the day?", "Not much. The track is matched to the building. Most people notice it at night."],
   ["What does the warranty cover?", "Trimlight covers the core parts for life. We service it free for 5 years, then a visit is $75."],
-  ["Do you work on businesses?", "Yes. Homes and businesses around Hot Springs."],
+  ["Do you work on businesses?", "Yes. Homes and commercial buildings across Arkansas."],
 ];
 
 export default function Home() {
@@ -113,10 +113,10 @@ export default function Home() {
           <div className="reveal">
             <h2 className="font-display text-3xl md:text-4xl">Put the lights up once.</h2>
             <p className="mt-4 text-lg leading-relaxed">
-              No more ladders every November, and no more paying for lights that last one season. Trimlight covers the core parts for life. We service the system free for 5 years. After that, a visit is $75.
+              No more ladders, and no more lights that last one season. Trimlight covers the core parts for life. We service the system free for 5 years. After that, a visit is $75.
             </p>
             <p className="mt-4 leading-relaxed">
-              Colors, patterns, and brightness live in a simple phone app. You don’t need to be technical. Pick a look, and the house follows.
+              Use it for security, uplighting, and downlighting, or pick a color from the phone. It works on homes and commercial buildings.
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function Home() {
       <section className="px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 className="font-display text-3xl md:text-4xl">Homes around Arkansas</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Work around Arkansas</h2>
             <Link to="/portfolio" className="font-semibold text-blue underline-offset-4 transition-colors hover:underline">See all installs</Link>
           </div>
           <div className="stagger mt-8 grid grid-cols-2 gap-3 lg:grid-cols-3">
@@ -146,7 +146,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#3a1280]/60" />
         <div className="reveal relative mx-auto max-w-3xl text-center">
           <p className="font-display text-2xl leading-snug md:text-3xl">“We use our Trimlight every single day. It’s rare to drive past our house and not see a fun pattern going.”</p>
-          <p className="mt-4 text-white/80">Diamond State Trimlight, Hot Springs</p>
+          <p className="mt-4 text-white/80">Diamond State Trimlight, Arkansas</p>
         </div>
       </section>
 
@@ -155,7 +155,7 @@ export default function Home() {
           <div className="reveal">
             <h2 className="font-display text-3xl">Questions</h2>
             <p className="mt-3 leading-relaxed">Rather talk it through? Call {PHONE}, Monday through Friday, 10am to 5pm.</p>
-            <div className="mt-6"><Btn to="/contact">Contact the shop</Btn></div>
+            <div className="mt-6"><Btn to="/contact">Contact us</Btn></div>
           </div>
           <dl className="stagger divide-y divide-black/10">
             {faqs.map(([q, a]) => (
@@ -171,7 +171,7 @@ export default function Home() {
       <section className="bg-[linear-gradient(90deg,#4b16c9,#8b2be2_55%,#d946ef)] px-5 py-14 text-center text-white md:px-8">
         <div className="reveal">
         <h2 className="font-display text-3xl">Lights on your place next.</h2>
-        <p className="mt-2">Tell us about the house, or call the Hot Springs shop.</p>
+        <p className="mt-2">Tell us about the property, or call us.</p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
           <a href={ESTIMATE_URL} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 font-medium text-[#5b27d6] hover:bg-sand">Get a quote</a>
           <a href="tel:5017222336" className="text-lg font-semibold underline-offset-4 transition-colors hover:underline">{PHONE}</a>

@@ -86,11 +86,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
         <div>
           <Link to="/" className="inline-flex"><img src={LOGO_DARK} alt="Diamond State Trimlight" className="h-20 w-auto" /></Link>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed">A locally owned, family Trimlight dealer in Hot Springs. We install it, and we service it.</p>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed">A locally owned Trimlight dealer serving Arkansas. We install it, and we service it.</p>
         </div>
         <div className="text-sm leading-relaxed">
-          <p className="font-semibold">The shop</p>
-          <p className="mt-2">Hot Springs, Arkansas<br />Monday – Friday<br />10am – 5pm CST</p>
+          <p className="font-semibold">Call us</p>
+          <p className="mt-2">Serving Arkansas<br />Monday – Friday<br />10am – 5pm CST</p>
           <a href="tel:5017222336" className="mt-3 block text-lg font-semibold text-blue underline-offset-4 transition-colors hover:underline">{PHONE}</a>
           <a href={`mailto:${EMAIL}`} className="mt-1 block break-words underline-offset-4 transition-colors hover:text-blue hover:underline">{EMAIL}</a>
         </div>

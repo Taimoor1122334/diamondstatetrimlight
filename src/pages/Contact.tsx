@@ -33,7 +33,7 @@ export default function Contact() {
   };
   const info: [string, string, string?][] = [
     ["Hours", "Monday – Friday, 10am – 5pm CST"],
-    ["Location", "Hot Springs, Arkansas"],
+    ["Area", "Serving Arkansas"],
     ["Email", EMAIL, `mailto:${EMAIL}`],
     ["Phone", PHONE, "tel:5017222336"],
   ];
@@ -50,7 +50,7 @@ export default function Contact() {
           <div className="reveal lg:col-span-5">
             <img src={shots[13].src} alt="A Trimlight install on a home at night" className="aspect-[4/3] w-full object-cover" />
             <p className="mt-5 font-semibold">Rather skip the form?</p>
-            <p className="mt-1">Request a quote through Trimlight, or call the shop at <a href="tel:5017222336" className="font-semibold text-blue underline-offset-4 transition-colors hover:underline">{PHONE}</a>.</p>
+            <p className="mt-1">Request a quote through Trimlight, or call us at <a href="tel:5017222336" className="font-semibold text-blue underline-offset-4 transition-colors hover:underline">{PHONE}</a>.</p>
             <div className="mt-4"><Btn href={ESTIMATE_URL}>Get a quote</Btn></div>
             <dl className="mt-6 divide-y divide-black/10 border-y border-black/10">
               {info.map(([k, v, h]) => (

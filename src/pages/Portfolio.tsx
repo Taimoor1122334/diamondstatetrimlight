@@ -57,7 +57,7 @@ export default function Portfolio() {
       <PageHero
         image={shots[0].src}
         title="Installs around Arkansas"
-        sub="A look at Trimlight on real homes. The track stays quiet during the day. At night, neighbors usually ask what it is."
+        sub="Homes and commercial buildings around Arkansas. The track stays quiet during the day and does the work at night."
       />
       <section className="px-5 py-12 md:px-8 md:py-16">
         <div className="mx-auto max-w-6xl">
@@ -91,7 +91,7 @@ export default function Portfolio() {
 
           <div className="mt-14 border-t border-black/10 pt-8">
             <h2 className="font-display text-3xl">Your place could be next.</h2>
-            <p className="mt-3 max-w-xl">Tell us a little about the house or the building. We’ll come back with a clear estimate.</p>
+            <p className="mt-3 max-w-xl">Tell us a little about the home or the commercial building. We’ll come back with a clear estimate.</p>
             <div className="mt-5"><Btn href={ESTIMATE_URL}>Request a free estimate</Btn></div>
           </div>
         </div>
